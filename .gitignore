@@ -26,4 +26,5 @@ pip-wheel-metadata
 
 bindings/c/tests/models
 bindings/c/tests/data
+bindings/c/lib
 

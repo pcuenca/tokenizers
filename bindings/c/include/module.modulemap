@@ -1,0 +1,4 @@
+module TokenizersC {
+	header "tokenizers.h"
+	export *
+}

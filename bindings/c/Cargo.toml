@@ -5,8 +5,7 @@ edition = "2021"
 
 [lib]
 name = "ctokenizers"
-# Maybe we'll need static for Swift, we'll see
-crate-type = ["cdylib"]
+crate-type = ["staticlib"]
 
 [dependencies]
 serde = { version = "1.0", features = [ "rc", "derive" ]}
