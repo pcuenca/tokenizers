@@ -19,6 +19,9 @@ use tk::models::{
 use tk::Model as ModelTrait;
 use tk::Token;
 
+#[no_mangle]
+pub static UNKNOWN_TOKEN_ID: u32 = u32::MAX;
+
 /// Model
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Model {
@@ -166,7 +169,7 @@ pub extern "C" fn wordlevel_destroy(model: *mut Model) {
 }
 
 
-// Return u32::MAX if the token is unknown.
+// Return UNKNOWN_TOKEN_ID if the token is unknown.
 // Not fond of it, but also not fond of returning an error code and accepting a pointer for the result.
 #[no_mangle]
 pub extern "C" fn token_to_id(model: *mut Model, token: *const c_char) -> u32 {
@@ -175,9 +178,9 @@ pub extern "C" fn token_to_id(model: *mut Model, token: *const c_char) -> u32 {
 
     let token = match unsafe { c_to_rust_string(token) } {
         Some(s) => s,
-        None => return u32::MAX,
+        None => return UNKNOWN_TOKEN_ID,
     };
 
     // LOL: no semicolon returns the value (sorry, I'm new to Rust)
-    model.token_to_id(&token[..]).unwrap_or(u32::MAX)
+    model.token_to_id(&token[..]).unwrap_or(UNKNOWN_TOKEN_ID)
 }

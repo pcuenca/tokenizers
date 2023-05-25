@@ -8,6 +8,8 @@
  */
 typedef struct Model Model;
 
+extern const uint32_t UNKNOWN_TOKEN_ID;
+
 void string_destroy(char *c_string);
 
 struct Model *wordlevel_create(const char *vocab_filename, const char *unk_token);

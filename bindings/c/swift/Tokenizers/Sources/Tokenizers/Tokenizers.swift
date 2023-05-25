@@ -19,7 +19,7 @@ public class Model {
 public extension Model {
     func idForToken(token: String) -> UInt32? {
         let id = token_to_id(model, token)
-        return id != UInt32.max ? id : nil
+        return id != UNKNOWN_TOKEN_ID ? id : nil
     }
 }
 
