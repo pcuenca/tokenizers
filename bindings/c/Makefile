@@ -1,15 +1,15 @@
-IOS=target/aarch64-apple-ios/release/libctokenizers.a
-SIM_ARM=target/aarch64-apple-ios-sim/release/libctokenizers.a
-SIM_X86=target/x86_64-apple-ios/release/libctokenizers.a
-MAC_ARM=target/aarch64-apple-darwin/release/libctokenizers.a
-MAC_X86=target/x86_64-apple-darwin/release/libctokenizers.a
+IOS=target/aarch64-apple-ios/release/libctokenizers.dylib
+SIM_ARM=target/aarch64-apple-ios-sim/release/libctokenizers.dylib
+SIM_X86=target/x86_64-apple-ios/release/libctokenizers.dylib
+MAC_ARM=target/aarch64-apple-darwin/release/libctokenizers.dylib
+MAC_X86=target/x86_64-apple-darwin/release/libctokenizers.dylib
 
 # For local debugging / tests
-HOST=target/debug/libctokenizers.a
+HOST=target/debug/libctokenizers.dylib
 
-FAT_SIM=lib/libctokenizers_iossimulator.a
-FAT_MAC=lib/libctokenizers_macos.a
-LIB_IOS=lib/libctokenizers.a
+FAT_SIM=lib/libctokenizers_iossimulator.dylib
+FAT_MAC=lib/libctokenizers_macos.dylib
+LIB_IOS=lib/libctokenizers.dylib
 
 FRAMEWORK=lib/TokenizersC.xcframework
 
@@ -18,6 +18,12 @@ all: $(FRAMEWORK) $(HOST)
 dev: $(HOST)
 
 fat: $(FAT_SIM) $(FAT_MAC) $(LIB_IOS)
+
+install: $(FRAMEWORK)
+	# Copy to the SPM directory.
+	# Potentially to be replaced with file upload to some repo/aws
+	# (In that case we'll need the md5 hash for `binaryTarget`)
+	cp -pR $(FRAMEWORK) swift/Tokenizers/Lib/`basename $(FRAMEWORK)`
 
 $(FRAMEWORK): $(FAT_SIM) $(FAT_MAC) $(LIB_IOS)
 	rm -rf $(FRAMEWORK)
