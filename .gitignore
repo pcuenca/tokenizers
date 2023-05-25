@@ -23,3 +23,7 @@ pip-wheel-metadata
 
 .vscode
 *.code-workspace
+
+bindings/c/tests/models
+bindings/c/tests/data
+

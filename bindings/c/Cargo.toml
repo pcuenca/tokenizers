@@ -1,0 +1,18 @@
+[package]
+name = "tokenizers-c"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "ctokenizers"
+# Maybe we'll need static for Swift, we'll see
+crate-type = ["cdylib"]
+
+[dependencies]
+serde = { version = "1.0", features = [ "rc", "derive" ]}
+serde_json = "1.0"
+
+[dependencies.tokenizers]
+version = "*"
+path = "../../tokenizers"
+
